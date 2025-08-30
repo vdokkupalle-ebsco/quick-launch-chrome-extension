@@ -67,7 +67,7 @@ chrome.omnibox.onInputChanged.addListener(async (text, suggest) => {
   Object.entries(shortcuts).forEach(([k, url]) => {
     if (!q || k.includes(q) || url.toLowerCase().includes(q)) {
       suggestions.push({
-        content: k,
+        content: `$${k} ${Math.random().toString(36).slice(2)}`, // ensure unique content
         description: `🔗 ${k} — ${url}`,
       });
     }
