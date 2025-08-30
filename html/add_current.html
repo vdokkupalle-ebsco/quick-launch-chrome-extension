@@ -1,0 +1,332 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Add to Quick Launch</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <style>
+        :root {
+            --bg1: #7c3aed;
+            /* violet */
+            --bg2: #06b6d4;
+            /* cyan */
+            --card: #ffffffea;
+            --text: #0b1020;
+            --muted: #5b6577;
+            --border: #e6e8f0;
+            --shadow: 0 10px 30px rgba(0, 0, 0, .12);
+
+            /* BRAND COLORS (tweak freely) */
+            --brand1: #7c3aed;
+            --brand2: #06b6d4;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --card: #0f172acc;
+                --text: #f8fafc;
+                --muted: #9aa4b2;
+                --border: #23304a;
+                --shadow: 0 10px 30px rgba(0, 0, 0, .45);
+            }
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            font: 14px/1.5 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+            color: var(--text);
+            background: linear-gradient(135deg, var(--bg1), var(--bg2));
+            background-attachment: fixed;
+            padding: 12px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            min-width: 320px;
+        }
+
+        .wrap {
+            width: min(460px, 100%);
+            padding-bottom: 12px;
+        }
+
+        /* BRAND BAR */
+        .brand {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 0 0 8px;
+            background: linear-gradient(135deg, rgba(124, 58, 237, .18), rgba(6, 182, 212, .18));
+            backdrop-filter: blur(6px);
+        }
+
+        .brand-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 0;
+        }
+
+        .logo {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            display: grid;
+            place-items: center;
+            background: radial-gradient(80% 80% at 30% 20%, var(--brand2), var(--brand1));
+            box-shadow: 0 6px 14px rgba(0, 0, 0, .12) inset, 0 2px 6px rgba(0, 0, 0, .12);
+        }
+
+        .logo svg {
+            width: 18px;
+            height: 18px;
+            filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .25));
+        }
+
+        .wordmark {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+
+        .wordmark b {
+            font-weight: 800;
+            letter-spacing: .2px;
+            white-space: nowrap;
+        }
+
+        .wordmark small {
+            color: var(--muted);
+            line-height: 1;
+            margin-top: 2px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+
+        .brand-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .chip {
+            appearance: none;
+            border: 1px solid var(--border);
+            background: #ffffffa6;
+            border-radius: 10px;
+            padding: 6px 10px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .chip {
+                background: #0b1220a6;
+                color: var(--text);
+            }
+        }
+
+        .chip:hover {
+            filter: brightness(1.02);
+        }
+
+        .card {
+            background: var(--card);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            padding: 14px;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .header img {
+            width: 18px;
+            height: 18px;
+            border-radius: 4px;
+        }
+
+        .header .title {
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        label {
+            display: block;
+            font-size: 12px;
+            color: var(--muted);
+            margin-bottom: 6px;
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            border: 1px solid var(--border);
+            background: #ffffffd0;
+            border-radius: 10px;
+            padding: 10px 12px;
+            outline: none;
+            transition: box-shadow .2s, border-color .2s, transform .06s;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            input[type="text"] {
+                background: #0b1220d9;
+                color: var(--text);
+            }
+        }
+
+        input[type="text"]:focus-visible {
+            border-color: #06b6d4;
+            box-shadow: 0 0 0 3px rgba(6, 182, 212, .25);
+        }
+
+        input[type="text"]:active {
+            transform: scale(.998);
+        }
+
+        .actions {
+            display: flex;
+            gap: 8px;
+            justify-content: flex-end;
+            margin-top: 4px;
+        }
+
+        .btn {
+            appearance: none;
+            border: 0;
+            border-radius: 12px;
+            padding: 10px 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform .06s, box-shadow .2s, filter .2s;
+            white-space: nowrap;
+            height: 40px;
+        }
+
+        /* Darker green gradient for crisp white text (no text-shadow/outline) */
+        .btn.save {
+            background: linear-gradient(135deg, #16a34a, #15803d);
+            color: #fff;
+            box-shadow: 0 6px 16px rgba(21, 128, 61, .35);
+        }
+
+        .btn.save:hover {
+            filter: brightness(1.05);
+        }
+
+        .btn.save:active {
+            transform: translateY(1px);
+        }
+
+        .btn.cancel {
+            background: #e5e7eb;
+            color: #111827;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .btn.cancel {
+                background: #1f2937;
+                color: #e5e7eb;
+            }
+        }
+
+        .error {
+            color: #b91c1c;
+            min-height: 18px;
+            font-size: 12px;
+            margin-top: 2px;
+        }
+
+        .hint {
+            margin-top: 6px;
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .hint code {
+            background: rgba(0, 0, 0, .08);
+            border-radius: 6px;
+            padding: 2px 6px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .hint code {
+                background: rgba(255, 255, 255, .08);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+
+        <!-- BRAND BAR -->
+        <div class="brand">
+            <div class="brand-left">
+                <div class="wordmark">
+                    <b>🌈 Quick Launch Shortcuts</b>
+                </div>
+
+            </div>
+            <div class="brand-actions">
+                <button class="chip" id="openOptions" type="button">Manage</button>
+            </div>
+        </div>
+
+        <section class="card">
+            <div class="header">
+                <div class="title" id="title">Current Page</div>
+            </div>
+
+            <div class="row">
+                <div>
+                    <label for="alias">Alias</label>
+                    <input id="alias" type="text" placeholder="e.g. gh" autocomplete="off" />
+                </div>
+                <div>
+                    <label for="url">URL</label>
+                    <input id="url" type="text" />
+                </div>
+
+                <div class="error" id="error"></div>
+
+                <div class="actions">
+                    <button class="btn cancel" id="cancel" type="button">Close</button>
+                    <button class="btn save" id="save" type="button">Add / Update</button>
+                </div>
+
+                <div class="hint">
+                    Tip: use via omnibox — type <code>go</code> + <strong>Tab</strong>, then your alias.
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Keep JS external for MV3 CSP -->
+    <script src="../js/add_current.js"></script>
+</body>
+
+</html>

@@ -86,8 +86,7 @@ function renderRows({ defaults, custom }) {
       const current = await load();
       delete current[alias];
       await save(current);
-      const defaults = await getDefaults();
-      renderRows(tbody, { defaults, custom: await load() }, refs);
+      await renderAll();
     });
 
     actions.append(edit, del);

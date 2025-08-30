@@ -29,6 +29,21 @@ chrome.runtime.onInstalled.addListener(async () => {
   }
 });
 
+chrome.runtime.onInstalled.addListener(() => {
+  chrome.contextMenus.create({
+    id: "ql_add_shortcut",
+    title: "Add this page to Quick Launch…",
+    contexts: ["page", "frame", "link", "selection", "page_action", "action"],
+  });
+});
+
+// Context menu handler → opens the popup prefilled
+chrome.contextMenus.onClicked.addListener(async (info, tab) => {
+  if (info.menuItemId !== "ql_add_shortcut") return;
+  // Programmatically open the action popup pointing at current tab
+  chrome.action.openPopup(); // popup reads active tab to prefill
+});
+
 // Let options page read the built-in defaults without duplicating them
 chrome.runtime.onMessage.addListener((msg, _, sendResponse) => {
   if (msg && msg.type === "get-defaults") {

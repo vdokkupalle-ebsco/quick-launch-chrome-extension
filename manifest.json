@@ -1,12 +1,20 @@
 {
   "manifest_version": 3,
   "name": "Quick Launch Shortcuts",
-  "version": "1.0.0",
-  "description": "Open websites from the address bar using short aliases.",
+  "version": "1.2.0",
+  "description": "Open websites from omnibox or popup using aliases.",
   "omnibox": { "keyword": "go" },
-  "permissions": ["storage"],
-  "options_page": "options.html",
-  "background": {
-    "service_worker": "background.js"
+  "permissions": ["storage", "tabs", "contextMenus"],
+  "background": { "service_worker": "js/background.js" },
+  "options_page": "html/options.html",
+  "action": {
+    "default_title": "Add current page to Quick Launch",
+    "default_popup": "html/add_current.html"
+  },
+  "commands": {
+    "open-popup": {
+      "suggested_key": { "default": "Ctrl+Space" },
+      "description": "Open Quick Launch popup"
+    }
   }
 }
