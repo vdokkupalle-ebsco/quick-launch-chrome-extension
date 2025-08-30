@@ -1,0 +1,12 @@
+{
+  "manifest_version": 3,
+  "name": "Quick Launch Shortcuts",
+  "version": "1.0.0",
+  "description": "Open websites from the address bar using short aliases.",
+  "omnibox": { "keyword": "go" },
+  "permissions": ["storage"],
+  "options_page": "options.html",
+  "background": {
+    "service_worker": "background.js"
+  }
+}
