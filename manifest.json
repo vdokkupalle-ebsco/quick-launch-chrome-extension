@@ -10,11 +10,5 @@
   "action": {
     "default_title": "Add current page to Quick Launch",
     "default_popup": "html/add_current.html"
-  },
-  "commands": {
-    "open-popup": {
-      "suggested_key": { "default": "Ctrl+Space" },
-      "description": "Open Quick Launch popup"
-    }
   }
 }
