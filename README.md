@@ -114,10 +114,3 @@ This project is open-source under the MIT License.
 Feel free to use, modify, and distribute it.
 
 ---
-
-## 🙌 Credits
-
-- Rocket icon inspired by your provided SVG.
-- Built using [Chrome Extensions Manifest V3](https://developer.chrome.com/docs/extensions/mv3/).
-
----
